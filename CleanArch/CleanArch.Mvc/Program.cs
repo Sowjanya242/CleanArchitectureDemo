@@ -2,6 +2,7 @@ using CleanArch.Mvc.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CleanArch.Infra.Data.Context;
+using ClassArch.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+DependencyContainer.RegisterService(builder.Services);
 
 var app = builder.Build();
 
@@ -50,3 +53,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+
